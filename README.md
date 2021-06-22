@@ -1,2 +1,2 @@
-# Multiplayer Tic Tac Toe
+# ws-tic-tac-toe
 Tic Tac Toe Multiplayer game utilized with Websockets
