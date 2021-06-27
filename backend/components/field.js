@@ -8,28 +8,28 @@ class Field {
     field = [[0,0,0],[0,0,0],[0,0,0]];
 
     getCell(x, y) {
-        return this.field[x][y];
+        return this.field[y][x];
     }
 
     setCell(x, y, value) {
-        this.field[x][y] = value;
-    }
-
-    checkRow(rowIdx, id) {
-        return this.field[rowIdx].every((cell) => cell == id);
+        this.field[y][x] = value;
     }
 
     checkCol(colIdx, id) {
-        let col = [];
-        this.field.forEach((row) => col.push(row[colIdx]));
-        return col.every((cell) => cell == id);
+        return this.field[colIdx].every((cell) => cell == id);
+    }
+
+    checkRow(rowIdx, id) {
+        let row = [];
+        this.field.forEach((col) => row.push(col[rowIdx]));
+        return row.every((cell) => cell == id);
     }
 
     checkDiagonal(lr, id) {
         let lrIdxes = lr ? [0,1,2] : [2,1,0];
         let lrIdx = 0;
         let diag = []
-        this.field.forEach((row) =>{ diag.push(row[lrIdxes[lrIdx]]); lrIdx++});
+        this.field.forEach((col) =>{ diag.push(col[lrIdxes[lrIdx]]); lrIdx++});
         return diag.every((cell) => cell == id);
     }
 
@@ -39,6 +39,21 @@ class Field {
         let diagWin = this.checkDiagonal(true, id) || this.checkDiagonal(false, id);
 
         return colWin || rowWin || diagWin;
+    }
+
+    checkGameOver(id) {
+        let fieldFull = this.field[0].every((cell) => cell != 0) && this.field[1].every((cell) => cell != 0) && this.field[2].every((cell) => cell != 0);
+        let win = this.checkWin(id)
+
+        return {"over": fieldFull || win, "id": win ? id : 0};
+    }
+
+    resetField() {
+        this.field = [[0,0,0],[0,0,0],[0,0,0]];
+    }
+
+    getField() {
+        return this.field;
     }
 }
 
