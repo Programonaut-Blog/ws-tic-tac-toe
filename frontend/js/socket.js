@@ -59,15 +59,22 @@ socket.on('over', (overObj) => {
 // send turn event to server
 function turn(x, y) {
     if (activeId != clientId) return;
+    if (getField(x,y).classList.contains(token[1]) || getField(x,y).classList.contains(token[2])) return;
+    console.log('send')
     socket.emit("turn", {
         "x": x,
         "y": y
     })
 }
 
+// get field
+function getField(x, y) {
+    return document.getElementById(`x${x}y${y}`)
+}
+
 // update css for field
 function setField(x, y, id) {
-    let field = document.getElementById(`x${x}y${y}`)
+    let field = getField(x,y);
     field.classList.add(`${token[id]}`);
 }
 
