@@ -63,10 +63,12 @@ button:hover {
 
 .cross {
     background-image: url("../assets/cross.svg");
+    background-size: contain;
 }
 
 .circle {
     background-image: url("../assets/circle.svg");
+    background-size: contain;
 }
 
 /*  */
@@ -114,4 +116,24 @@ button:hover {
 #replay:hover {
     color: #fdfffc;
     background-color: transparent;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 800px) {
+    #tic-tac-toe-grid {
+        grid-template-columns: repeat(3, 80px);
+        grid-template-rows: repeat(3, 80px);
+    }
+
+    #current-turn {
+        font-size: 36px;
+    }
+
+    .winner-container{
+        font-size: 42px;
+    }
+
+    #replay {
+        font-size: 36px;
+    }
 }
